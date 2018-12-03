@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>JQUERY For Webapp</title>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+
+<button onclick="fetch('students')">Students</button>
+<button onclick="fetch2('courses')">Courses</button>
+<button onclick="fetch1('sections')">Sections</button>
+
+
+<div id="list">
+</div>
+
+<script>
+var fetch = function(which) {
+    $("#list").empty();
+    $.get("http://localhost:3000/" + which + ".json", true)
+    .done(function(json) {
+        for (item in json) {
+            lis = "<li>";
+            lis += json[item].name + " ";
+            lis += json[item].number + " ";
+            lis += "</li>";
+            $("#list").append(lis);
+        }
+    })
+    .fail(function(json){ console.log("fail"); })
+};
+
+var fetch2 = function(which) {
+    $("#list").empty();
+    $.get("http://localhost:3000/" + which + ".json", true)
+    .done(function(json) {
+        for (item in json) {
+            lis = "<li>";
+            lis += json[item].name + "\t";
+            lis += json[item].department + "\t";
+            lis += json[item].number + "\t";
+            lis += json[item].creditHour + "\t";
+            lis += "</li>";
+            $("#list").append(lis);
+        }
+    })
+    .fail(function(json){ console.log("fail"); })
+};
+
+var fetch1 = function(which) {
+    $("#list").empty();
+    $.get("http://localhost:3000/" + which + ".json", true)
+    .done(function(json) {
+        for (item in json) {
+            lis = "<li>";
+            lis += json[item].semester + " ";
+            lis += json[item].number + " ";
+            lis += "</li>";
+            $("#list").append(lis);
+        }
+    })
+    .fail(function(json){ console.log("fail"); })
+};
+
+
+</script>
+
+</body>
+</html>
